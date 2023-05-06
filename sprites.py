@@ -219,7 +219,7 @@ class Player(Generic):
 		self.direction = vector()
 		self.pos = vector(self.rect.center)
 		self.speed = 300
-		self.gravity = 4
+		self.gravity = 5
 		self.on_floor = False
 
 		# collision
