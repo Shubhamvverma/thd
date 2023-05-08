@@ -7,18 +7,25 @@ from pygame.image import load
 
 from editor import Editor
 from level import Level
+from launcher import  Launcher
+from gamemenu import GameMenu 
 
 from os import walk
 
 class Main:
+
+	screen_num = 1
+
 	def __init__(self):
 		pygame.init()
 		self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 		self.clock = pygame.time.Clock()
 		self.imports()
 
-		self.editor_active = True
+		self.editor_active = False
 		self.transition = Transition(self.toggle)
+		self.launcher = Launcher(self.screen_num, 500, self.switchToMenu)
+		self.gamemenu = GameMenu(self.screen_num, self.switch)
 		self.editor = Editor(self.land_tiles, self.switch)
 
 		# cursor 
@@ -62,9 +69,17 @@ class Main:
 		}
 
 	def toggle(self):
-		self.editor_active = not self.editor_active
-		if self.editor_active:
-			self.editor.editor_music.play()
+		# 4 state switch
+		if self.screen_num == 1:
+			pass
+		elif self.screen_num == 2:
+			pass
+		elif self.screen_num == 3:
+			pass
+		elif self.screen_num == 4:
+			self.editor_active = not self.editor_active
+			if self.editor_active:
+				self.editor.editor_music.play()		
 
 	def switch(self, grid = None):
 		self.transition.active = True
@@ -91,13 +106,19 @@ class Main:
 	def run(self):
 		while True:
 			dt = self.clock.tick() / 1000
-			
-			if self.editor_active:
+			if self.screen_num == 1:
+				self.launcher.run(dt)
+			elif self.screen_num == 2:
+				self.gamemenu.run(dt)
+			elif self.screen_num == 3:
 				self.editor.run(dt)
-			else:
-				self.level.run(dt)
-			self.transition.display(dt)
+				self.transition.display(dt)
+			elif self.screen == 4 :
+				self.level.run(dt)	
 			pygame.display.update()
+
+	def switchToMenu(self):
+		self.screen_num = 2
 
 
 class Transition:

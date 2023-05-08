@@ -122,6 +122,8 @@ class Level:
 		if collision_sprites:
 			self.hit_sound.play()
 			self.player.damage()
+			self.player.kill()
+			#pygame.quit()
 
 	def event_loop(self):
 		for event in pygame.event.get():
