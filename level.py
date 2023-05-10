@@ -123,7 +123,8 @@ class Level:
 			self.hit_sound.play()
 			self.player.damage()
 			self.player.kill()
-			#pygame.quit()
+			pygame.quit()
+			exit()
 
 	def event_loop(self):
 		for event in pygame.event.get():
