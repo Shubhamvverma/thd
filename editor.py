@@ -587,3 +587,4 @@ class CanvasObject(pygame.sprite.Sprite):
     def update(self, dt):
         self.animate(dt)
         self.drag()
+                
