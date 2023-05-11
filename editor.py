@@ -217,7 +217,6 @@ class Editor:
 
         return layers
 
-
     # input
     def event_loop(self):
         for event in pygame.event.get():
